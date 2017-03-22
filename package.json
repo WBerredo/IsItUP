@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/WBerredo/IsItUP/issues"
   },
-  "homepage": "https://github.com/WBerredo/IsItUP#readme"
+  "homepage": "https://github.com/WBerredo/IsItUP#readme",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.27.0"
+  }
 }
