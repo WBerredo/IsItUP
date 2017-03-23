@@ -8,7 +8,7 @@ let token = process.env.IS_IT_UP_TOKEN;
 let http = require('http');
 let https = require('https');
 let TelegramBot = require('node-telegram-bot-api');
-let telegram = new TelegramBot(token, {polling: true});
+let telegram = new TelegramBot(token, {polling: true, onlyFirstMatch: true});
 
 // possibilities Regex
 let commandString  = "\/verify"
