@@ -5,14 +5,14 @@ Telegram bot to verify if a website is up. https://t.me/Is_it_UPBot
 
 1. Meet [IsItUP?](https://t.me/Is_it_UPBot) at telegram :D
 
-### Run your own bot
+### or run your own bot
 1. Clone the project
 2. Go to directory
 ```bash
 cd IsItUP/
 ```
 
-3. Set an enviroment variable called IS_IT_UP_TOKEN with your telegram token. 
+3. Set an enviroment variable called IS_IT_UP_TOKEN with your telegram token.
 To learn how to do: read this [great article](https://www.schrodinger.com/kb/1842).
 At bash:
 ```bash
@@ -32,10 +32,14 @@ npm start
 
 ## Usage
 
-1. Start a conversation with [IsItUP?](https://t.me/Is_it_UPBot) bot or your bot.
-2. Type:
+It can be done with [IsItUP?](https://t.me/Is_it_UPBot) bot or your own bot.
+
+### Conversation
+
+* Start a conversation
+* Type:
 ```
-\verify https://telegram.org
+/verify https://telegram.org
 ```
 or just
 ```
@@ -43,7 +47,15 @@ https://telegram.org
 ```
 to verify the availability of one website
 
-* PS: telegram.org is a sample(of course :D), type whatever you need.
+### Group
+* [Invite](http://stackoverflow.com/a/40175742) the bot to a group
+
+* Call it by name and tell the domain
+```
+@Is_it_UPBot https://telegram.org
+```
+
+PS: telegram.org is a sample(of course :D), type whatever you need.
 
 ## Contributing
 
