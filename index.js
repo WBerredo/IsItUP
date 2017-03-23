@@ -1,9 +1,9 @@
-if(process.argv.length<3) {
-    console.error("Usage: node index.js telegram_token");
+if(process.env.IS_IT_UP_TOKEN==undefined) {
+    console.error("You have to set the environment variable IS_IT_UP_TOKEN with your telegram token.");
     process.exit(1);
 }
 
-let token = process.argv[2];
+let token = process.env.IS_IT_UP_TOKEN;
 
 let http = require('http');
 let https = require('https');
@@ -12,7 +12,7 @@ let telegram = new TelegramBot(token, {polling: true});
 
 // possibilities Regex
 let commandString  = "\/verify"
-let urlString = "(http(s)?(:\/\/))?(www\.)?[a-zA-Z0-9-_\.]+(\.[a-zA-Z0-9]{2,})([-a-zA-Z0-9:%_\+.~#?&//=]*)"
+let urlString = "(http([s])?:\\/\\/){0,1}(www\\.){0,1}[a-zA-Z0-9\\.\\-]+\\.[a-zA-Z]{2,5}[\\.]{0,1}"
 
 let startRegex = /\/start/;
 let urlRegex = new RegExp("^" + urlString);
