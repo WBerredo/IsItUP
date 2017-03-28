@@ -67,7 +67,9 @@ PS: telegram.org is a sample(of course :D), type whatever you need.
 
 ## Thanks
 
-[Node.js Telegram Bot API](https://github.com/yagop/node-telegram-bot-api)
+* [isitup.org](https://isitup.org/) - for the concept
+* [Node.js Telegram Bot API](https://github.com/yagop/node-telegram-bot-api) - for provide an easy way to create a telegram bot
+
 
 ## License
 [MIT](LICENSE.md)
