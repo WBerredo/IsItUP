@@ -5,17 +5,17 @@ class Message {
 
     static get verifyHowToUse() {
         return "To use /verify command you have to pass an URL. " +
-                "Ex: /verify telegram.org";
+            "Ex: /verify telegram.org";
     }
 
     static welcomeFirstStep(username) {
         return `Hi ${username}, I'm the Is it UP bot, my mission is tell you` +
-                ` if any website is up or down.`;
+            ` if any website is up or down.`;
     }
 
     static get welcomeSecondStep() {
         return `You can use the command /verify telegram.org or just type` +
-                ` your url to verify the current status.`;
+            ` your url to verify the current status.`;
     }
 
     static successStatus(url) {
@@ -28,7 +28,7 @@ class Message {
 
     static clientOrServerErrorStatus(url, statusCode) {
         return `${url} is responding, but the status code` +
-                ` is ${statusCode} \u{1F633}`;
+            ` is ${statusCode} \u{1F633}`;
     }
 }
 

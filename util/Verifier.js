@@ -7,16 +7,16 @@ let Regex = require('./Regex.js');
 
 class Verifier {
     static verifyUrl(msg, match, callback) {
-    //  setup according url
+        //  setup according url
         let request = http;
         let url = match[0];
 
-        if(url.match(Regex.justVerifyRegex)) return;
+        if (url.match(Regex.justVerifyRegex)) return;
 
-    //  verify if its https or doesn`t have protocol
-        if(match[2]=="s") {
+        //  verify if its https or doesn`t have protocol
+        if (match[2] == "s") {
             request = https;
-        } else if(match[1]==undefined) {
+        } else if (match[1] == undefined) {
             url = "http://" + url;
         }
 
@@ -27,7 +27,7 @@ class Verifier {
 
             callback(msg, url, true, res.statusCode);
         }).on('error', e => {
-    //      is not responding
+            //      is not responding
             console.log(e);
             callback(msg, url, false);
         });
