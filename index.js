@@ -67,7 +67,7 @@ telegram.on('message', msg => {
         if(Regex.usernameCallRegex.exec(textMessage)) {
               if(match = usernameCallLinkRegex.exec(textMessage)) {
                   match[0] = match[0].split(' ')[1];
-                  Verifier.verifyUrl(msg, match);
+                  Verifier.verifyUrl(msg, match, verifyCallback);
               } else {
                   telegram.sendMessage(chatId, Message.didntUnderstand);
               }
