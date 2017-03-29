@@ -18,7 +18,7 @@ At bash:
 ```bash
 export IS_IT_UP_TOKEN=your_telegram_token
 ```
-4. (Optional) Setup Firebase. (If you want the [track feature](#Track))
+4. (Optional) Setup Firebase. (If you want the [track feature](#track-if-enabled))
     * [Create a Firebase project and download the credentials](https://firebase.google.com/docs/server/setup)
     * Set environment variables called IS_IT_UP_FIREBASE_PRIVATE_KEY,
     IS_IT_UP_FIREBASE_CLIENT_EMAIL and  IS_IT_UP_FIREBASE_DATABASE_URL with your firebase credentials (private key and client email are in the downloaded file)
