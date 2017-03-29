@@ -23,12 +23,12 @@ class Message {
     }
 
     static errorStatus(url) {
-        return `${url} is down \u{1F614}`;
+        return `${url} is down \u{1F633}`;
     }
 
     static clientOrServerErrorStatus(url, statusCode) {
         return `${url} is responding, but the status code` +
-            ` is ${statusCode} \u{1F633}`;
+            ` is ${statusCode} \u{1F914}`;
     }
 
     static addedToTrackList(url) {
