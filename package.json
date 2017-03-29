@@ -26,6 +26,9 @@
   },
   "homepage": "https://github.com/WBerredo/IsItUP#readme",
   "dependencies": {
+    "firebase-admin": "^4.1.3",
+    "moment": "^2.18.1",
+    "node-schedule": "^1.2.1",
     "node-telegram-bot-api": "^0.27.0"
   }
 }

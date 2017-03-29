@@ -18,6 +18,10 @@ class Regex {
         return "\/verify";
     }
 
+    static get _trackCommandString() {
+        return "\/track";
+    }
+
     static get startRegex() {
         return /\/start/;
     }
@@ -32,6 +36,14 @@ class Regex {
 
     static get justVerifyRegex() {
         return new RegExp(Regex._verifyCommandString + "$");
+    }
+
+    static get trackUrlRegex() {
+        return new RegExp(Regex._trackCommandString + "\\s" + Regex._urlRegexString);
+    }
+
+    static get trackListRegex() {
+        return /^\/track_list$/;
     }
 
     static get usernameCallRegex() {

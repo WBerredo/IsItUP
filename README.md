@@ -1,5 +1,5 @@
 # IsItUP? Bot
-Telegram bot to verify if a website is up. https://t.me/Is_it_UPBot
+Telegram bot to verify if a website is up or track an URL to be notified when it gets down. https://t.me/Is_it_UPBot
 
 ## Installation
 
@@ -18,14 +18,22 @@ At bash:
 ```bash
 export IS_IT_UP_TOKEN=your_telegram_token
 ```
-4. Install [node and npm](https://docs.npmjs.com/getting-started/installing-node)
+4. (Optional) Setup Firebase. (If you want the [track feature](#Track))
+    * [Create a Firebase project and download the credentials](https://firebase.google.com/docs/server/setup)
+    * Set environment variables called IS_IT_UP_FIREBASE_PRIVATE_KEY,
+    IS_IT_UP_FIREBASE_CLIENT_EMAIL and  IS_IT_UP_FIREBASE_DATABASE_URL with your firebase credentials (private key and client email are in the downloaded file)
+    ```bash
+    export IS_IT_UP_FIREBASE_CLIENT_EMAIL=email@domain.com
+    ```
 
-5. Download the dependencies
+5. Install [node and npm](https://docs.npmjs.com/getting-started/installing-node)
+
+6. Download the dependencies
 ```bash
 npm install
 ```
 
-6. Run the script
+7. Run the script
 ```bash
 npm start
 ```
@@ -46,6 +54,18 @@ or just
 https://telegram.org
 ```
 to verify the availability of one website
+
+### Track (if enabled)
+* To track an URL, you have to type:
+```
+/track https://telegram.org
+```
+* To get a list of URLs you are tracking:
+```
+/track_list
+```
+
+Every 5 minutes the bot you run a check all tracked URLs, if the status of an URL get changed(up->down, down->up), the user will be get notified.
 
 ### Group
 * [Invite](http://stackoverflow.com/a/40175742) the bot to a group

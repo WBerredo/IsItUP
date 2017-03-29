@@ -3,7 +3,7 @@ let http = require('http');
 let https = require('https');
 
 // My Modules
-let Regex = require('./Regex.js');
+let Regex = require('../util/Regex.js');
 
 class Verifier {
     static verifyUrl(msg, match, callback) {
@@ -27,8 +27,8 @@ class Verifier {
 
             callback(msg, url, true, res.statusCode);
         }).on('error', e => {
-            //      is not responding
-            console.log(e);
+    //      is not responding
+            console.log(`URL error: ${url}`);
             callback(msg, url, false);
         });
     }

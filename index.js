@@ -4,6 +4,9 @@ if (process.env.IS_IT_UP_TOKEN == undefined) {
 }
 
 let token = process.env.IS_IT_UP_TOKEN;
+let trackFeature = process.env.IS_IT_UP_TRACK && process.env.IS_IT_UP_TRACK == 'true';
+
+console.log("Running! \u{1F604}");
 
 // External Modules
 let TelegramBot = require('node-telegram-bot-api');
@@ -15,9 +18,7 @@ let telegram = new TelegramBot(token, {
 // My Modules
 let Regex = require('./util/Regex.js');
 let Message = require('./util/Message.js');
-let Verifier = require('./util/Verifier');
-
-console.log("Running! \u{1F604}");
+let Verifier = require('./feature/Verifier.js');
 
 // first message
 telegram.onText(Regex.startRegex, (msg, match) => {
@@ -68,7 +69,9 @@ telegram.on('message', msg => {
         !textMessage.match(Regex.urlRegex) &&
         !textMessage.match(Regex.verifyUrlRegex) &&
         !textMessage.match(Regex.startRegex) &&
-        !textMessage.match(Regex.justVerifyRegex)) {
+        !textMessage.match(Regex.justVerifyRegex) &&
+        !textMessage.match(Regex.trackUrlRegex) &&
+        !textMessage.match(Regex.trackListRegex)) {
         if (Regex.usernameCallRegex.exec(textMessage)) {
             if (match = usernameCallLinkRegex.exec(textMessage)) {
                 match[0] = match[0].split(' ')[1];
@@ -82,3 +85,39 @@ telegram.on('message', msg => {
         }
     }
 });
+
+
+// track feature
+if (trackFeature) {
+    console.log("with track feature");
+    var track = new(require('./feature/Track'))();
+
+    //  receive a track request
+    telegram.onText(Regex.trackUrlRegex, (msg, match) => {
+        match[0] = match[0].split(' ')[1];
+        Verifier.verifyUrl(msg, match, (msg, url, success, statusCode) => {
+            verifyCallback(msg, url, success, statusCode);
+            track.addUrl(url, msg.chat.id, success);
+
+            console.log(`${url} added to track list`);
+            telegram.sendMessage(msg.chat.id, Message.addedToTrackList(url));
+            telegram.sendMessage(msg.chat.id, Message.trackListHowToUse);
+        });
+    });
+
+    //receive a track list request
+    telegram.onText(Regex.trackListRegex, (msg, match) => {
+        track.getAllFromUser(msg.chat.id, (msgId, urls) => {
+            telegram.sendMessage(msgId, Message.getListMessage(urls));
+        });
+    });
+
+    //  setup verification
+    track.scheduleVerification((url, msgId, status) => {
+        if (status) {
+            telegram.sendMessage(msgId, Message.successStatus(url) + Message.checkedAt);
+        } else {
+            telegram.sendMessage(msgId, Message.errorStatus(url) + Message.checkedAt);
+        }
+    });
+}
