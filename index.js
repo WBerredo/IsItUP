@@ -21,7 +21,7 @@ let Message = require('./util/Message.js');
 let Verifier = require('./feature/Verifier.js');
 
 // first message
-telegram.onText(Regex.startRegex, (msg, match) => {
+telegram.onText(Regex.startOrHelpRegex, (msg, match) => {
     msgId = msg.chat.id;
 
     telegram.sendMessage(msgId, Message.welcomeFirstStep(msg.from.first_name));
@@ -55,10 +55,14 @@ function verifyCallback(msg, url, success, statusCode) {
     }
 }
 
-// just verify
+// wrong usage
 telegram.onText(Regex.justVerifyRegex, (msg) => {
     telegram.sendMessage(msg.chat.id, Message.verifyHowToUse);
-})
+});
+
+telegram.onText(Regex.justTrackRegex, (msg) => {
+    telegram.sendMessage(msg.chat.id, Message.trackHowToUse);
+});
 
 // not found
 telegram.on('message', msg => {
@@ -106,6 +110,29 @@ if (trackFeature) {
         track.getAllFromUser(msg.chat.id, (msgId, urls) => {
             telegram.sendMessage(msgId, Message.getListMessage(urls));
         });
+    });
+
+    // delete an url
+    telegram.onText(Regex.deleteTrackRegex, function(msg, match) {
+        track.getAllUrlsKeyBoard(msg.chat.id, keyboard => {
+            if (keyboard != null) {
+                telegram.sendMessage(msg.from.id, 'Choose an url to delete', keyboard);
+            } else {
+                telegram.sendMessage(msg.from.id, Message.urlNotFound);
+            }
+        })
+    });
+
+    // callback from custom keyboard(just when it is a delete action)
+    telegram.on("callback_query", function(callbackQuery) {
+        track.deleteUrl(callbackQuery.from.id, callbackQuery.data,
+            (success, msgId) => {
+                if (success) {
+                    telegram.sendMessage(msgId, Message.deleteSuccess);
+                } else {
+                    telegram.sendMessage(msdId, Message.deleteError);
+                }
+            });
     });
 
     //  setup verification

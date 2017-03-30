@@ -22,8 +22,8 @@ class Regex {
         return "\/track";
     }
 
-    static get startRegex() {
-        return /\/start/;
+    static get startOrHelpRegex() {
+        return /^\/start|\/help/;
     }
 
     static get urlRegex() {
@@ -42,6 +42,10 @@ class Regex {
         return new RegExp(Regex._trackCommandString + "\\s" + Regex._urlRegexString);
     }
 
+    static get justTrackRegex() {
+        return new RegExp(Regex._trackCommandString + "$");
+    }
+
     static get trackListRegex() {
         return /^\/track_list$/;
     }
@@ -54,14 +58,20 @@ class Regex {
         return new RegExp(Regex._botUsernameRegexString + Regex._urlRegexString);
     }
 
+    static get deleteTrackRegex() {
+        return /\/track_delete/;
+    }
+
     static isRegexMatch(textMessage) {
         return textMessage != undefined &&
             (textMessage.match(Regex.urlRegex) ||
                 textMessage.match(Regex.verifyUrlRegex) ||
-                textMessage.match(Regex.startRegex) ||
+                textMessage.match(Regex.startOrHelpRegex) ||
                 textMessage.match(Regex.justVerifyRegex) ||
                 textMessage.match(Regex.trackUrlRegex) ||
-                textMessage.match(Regex.trackListRegex)
+                textMessage.match(Regex.justTrackRegex) ||
+                textMessage.match(Regex.trackListRegex) ||
+                textMessage.match(Regex.deleteTrackRegex)
             );
     }
 }

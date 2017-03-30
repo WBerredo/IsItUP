@@ -60,12 +60,19 @@ to verify the availability of one website
 ```
 /track https://telegram.org
 ```
+
+* To delete an URL from the track list you have to type:
+```
+/track_delete
+```
+and then click at the URL you want to delete
+
 * To get a list of URLs you are tracking:
 ```
 /track_list
 ```
 
-Every 5 minutes the bot you run a check all tracked URLs, if the status of an URL get changed(up->down, down->up), the user will be get notified.
+Every 5 minutes the bot will run a check at  track list, if the status of an URL get changed(up->down, down->up), the user will be notified.
 
 ### Group
 * [Invite](http://stackoverflow.com/a/40175742) the bot to a group

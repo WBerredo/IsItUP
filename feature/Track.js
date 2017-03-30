@@ -77,8 +77,8 @@ class Track {
     }
 
     /**
-    * Set an url item
-    */
+     * Set an url item
+     */
     setUrl(url, msgId, currentStatus, itemId) {
         let ref = this._firebase.database().ref(`track/${msgId}/${itemId}`);
         let urlTrack = new this._urlTrack(url, currentStatus);
@@ -88,13 +88,19 @@ class Track {
 
 
     /**
-    * Get all tracked urls
-    */
-    getAllFromUser(msgId, callback) {
+     * Get all tracked urls
+     */
+    getAllFromUser(msgId, callback, justUrls = true) {
         let ref = this._firebase.database().ref(`track/${msgId}`);
         ref.once("value", snapshot => {
             let urlList = [];
             let urls = snapshot.val();
+
+            if (!justUrls) {
+                callback(msgId, urls);
+                return;
+            }
+
             // Iterate each url from user
             for (let itemKey in urls) {
                 let urlItem = urls[itemKey];
@@ -102,6 +108,42 @@ class Track {
             }
 
             callback(msgId, urlList);
+        });
+    }
+
+    /**
+     * Generate a keyboard with all tracked urls
+     */
+    getAllUrlsKeyBoard(msgId, callback) {
+        this.getAllFromUser(msgId, (msgId, urls) => {
+            const urlOpts = [];
+            for (let itemKey in urls) {
+                let urlItem = urls[itemKey];
+                urlOpts.push([{
+                    text: urlItem.url,
+                    callback_data: itemKey
+                }]);
+            }
+
+            if (urlOpts.length == 0) {
+                callback(null);
+                return;
+            }
+
+            const keyboard = {
+                reply_markup: {
+                    inline_keyboard: urlOpts
+                }
+            };
+
+            callback(keyboard)
+        }, false);
+    }
+
+    // delete an url
+    deleteUrl(msgId, itemId, callback) {
+        this._firebase.database().ref(`track/${msgId}/${itemId}`).remove(error => {
+            callback(!error, msgId);
         });
     }
 }
