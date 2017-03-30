@@ -65,24 +65,20 @@ telegram.on('message', msg => {
     let textMessage = msg.text;
     let chatId = msg.chat.id;
 
-    if (textMessage != undefined &&
-        !textMessage.match(Regex.urlRegex) &&
-        !textMessage.match(Regex.verifyUrlRegex) &&
-        !textMessage.match(Regex.startRegex) &&
-        !textMessage.match(Regex.justVerifyRegex) &&
-        !textMessage.match(Regex.trackUrlRegex) &&
-        !textMessage.match(Regex.trackListRegex)) {
-        if (Regex.usernameCallRegex.exec(textMessage)) {
-            if (match = usernameCallLinkRegex.exec(textMessage)) {
-                match[0] = match[0].split(' ')[1];
-                Verifier.verifyUrl(msg, match, verifyCallback);
-            } else {
-                telegram.sendMessage(chatId, Message.didntUnderstand);
-            }
-        } else if (msg.chat.type != 'group') {
-            console.log("error: " + textMessage);
-            telegram.sendMessage(chatId, Message.didntUnderstand);
-        }
+    // verify if match with any regex from user
+    if (textMessage == undefined || Regex.isRegexMatch(textMessage)) return;
+
+
+    // Verify if its a group call
+    if (Regex.usernameCallRegex.exec(textMessage) &&
+        (match = Regex.usernameCallLinkRegex.exec(textMessage))
+    ) {
+        match[0] = match[0].split(' ')[1];
+        Verifier.verifyUrl(msg, match, verifyCallback);
+    } else if (Regex.usernameCallRegex.exec(textMessage) || msg.chat.type != 'group') {
+        // Group call without link or not a group call
+        console.log("error: " + textMessage);
+        telegram.sendMessage(chatId, Message.didntUnderstand);
     }
 });
 

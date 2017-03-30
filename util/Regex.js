@@ -51,7 +51,18 @@ class Regex {
     }
 
     static get usernameCallLinkRegex() {
-        return new RegExp(Regex._botUsernameRegexString + urlString);
+        return new RegExp(Regex._botUsernameRegexString + Regex._urlRegexString);
+    }
+
+    static isRegexMatch(textMessage) {
+        return textMessage != undefined &&
+            (textMessage.match(Regex.urlRegex) ||
+                textMessage.match(Regex.verifyUrlRegex) ||
+                textMessage.match(Regex.startRegex) ||
+                textMessage.match(Regex.justVerifyRegex) ||
+                textMessage.match(Regex.trackUrlRegex) ||
+                textMessage.match(Regex.trackListRegex)
+            );
     }
 }
 
