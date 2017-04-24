@@ -29,9 +29,8 @@ class Track {
 
     /**
      * Schedule verification in a specific time.
-     * Default: Every 30 minutes
      */
-    scheduleVerification(callback, time = '*/5 * * * *') {
+    scheduleVerification(callback, time = '*/15 * * * *') {
         this._schedule.scheduleJob(time, () => {
             console.log("Verifying track list...");
             let ref = this._firebase.database().ref('track/');
