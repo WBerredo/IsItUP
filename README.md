@@ -25,15 +25,19 @@ export IS_IT_UP_TOKEN=your_telegram_token
     ```bash
     export IS_IT_UP_FIREBASE_CLIENT_EMAIL=email@domain.com
     ```
+5. (Optional) Setup [Botan](http://botan.io). If you want to use an *analytic* for telegram.
+   * Set an enviroment variable called IS_IT_UP_BOTAN_TOKEN with your botan token. 
+   ```bash
+   export IS_IT_UP_BOTAN_TOKEN=your_botan_token
+   ```
+6. Install [node and npm](https://docs.npmjs.com/getting-started/installing-node)
 
-5. Install [node and npm](https://docs.npmjs.com/getting-started/installing-node)
-
-6. Download the dependencies
+7. Download the dependencies
 ```bash
 npm install
 ```
 
-7. Run the script
+8. Run the script
 ```bash
 npm start
 ```
