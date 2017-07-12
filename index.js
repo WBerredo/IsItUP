@@ -17,6 +17,12 @@ let telegram = new TelegramBot(token, {
     onlyFirstMatch: true
 });
 
+let botan = false;
+if(process.env.IS_IT_UP_BOTAN_TOKEN!=undefined) {
+    botan = require('botanio')(token);
+    console.log("with botan");
+}
+
 // My Modules
 let Regex = require('./util/Regex.js');
 let Message = require('./util/Message.js');
@@ -32,9 +38,13 @@ telegram.onText(Regex.startOrHelpRegex, (msg, match) => {
 
 // verify urls
 telegram.onText(Regex.urlRegex, (msg, match) => {
+    botan.track(msg, 'Url');
+
     Verifier.verifyUrl(msg, match, verifyCallback);
 });
 telegram.onText(Regex.verifyUrlRegex, (msg, match) => {
+    botan.track(msg, 'verify');
+
     match[0] = match[0].split(' ')[1];
     Verifier.verifyUrl(msg, match, verifyCallback);
 });
@@ -96,6 +106,8 @@ if (trackFeature) {
 
     //  receive a track request
     telegram.onText(Regex.trackUrlRegex, (msg, match) => {
+        botan.track(msg, 'track');
+
         match[0] = match[0].split(' ')[1];
         Verifier.verifyUrl(msg, match, (msg, url, success, statusCode) => {
             verifyCallback(msg, url, success, statusCode);
@@ -109,6 +121,7 @@ if (trackFeature) {
 
     //receive a track list request
     telegram.onText(Regex.trackListRegex, (msg, match) => {
+        botan.track(msg, 'track_list');
         track.getAllFromUser(msg.chat.id, (msgId, urls) => {
             telegram.sendMessage(msgId, Message.getListMessage(urls));
         });
@@ -116,6 +129,8 @@ if (trackFeature) {
 
     // delete an url
     telegram.onText(Regex.deleteTrackRegex, function(msg, match) {
+        botan.track(msg, 'track_delete');
+
         track.getAllUrlsKeyBoard(msg.chat.id, keyboard => {
             if (keyboard != null) {
                 telegram.sendMessage(msg.from.id, 'Choose an url to delete', keyboard);
