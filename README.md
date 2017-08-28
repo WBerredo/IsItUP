@@ -1,5 +1,6 @@
 # IsItUP? Bot
 Telegram bot to verify if a website is up or track an URL to be notified when it gets down. https://t.me/Is_it_UPBot
+![IsItUP?](logo.jpg)
 
 ## Installation
 
