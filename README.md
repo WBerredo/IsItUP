@@ -83,7 +83,7 @@ Every 5 minutes the bot will run a check at  track list, if the status of an URL
 @Is_it_UPBot https://telegram.org
 ```
 
-PS: telegram.org is a sample(of course :D), type whatever you need.
+PS: telegram.org is a sample (of course :D), type whatever you need.
 
 ## Contributing
 
