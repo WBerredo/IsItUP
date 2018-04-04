@@ -1,6 +1,7 @@
 # IsItUP? Bot
-<img src="logo.jpg" width="48px">
->A Telegram bot that verifies whether or not a website is up, tracks URLs and notifies when hosts have unreachable connections. https://t.me/Is_it_UPBot
+> A Telegram bot that verifies whether or not a website is up, tracks URLs and notifies when hosts have unreachable connections. https://t.me/Is_it_UPBot
+
+<img src="logo.jpg" width="48px" />
 
 ## Installation
 
