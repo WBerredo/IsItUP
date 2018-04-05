@@ -1,6 +1,7 @@
 # IsItUP? Bot
-<img src="logo.jpg" width="48px">
-Telegram bot to verify if a website is up or track an URL to be notified when it gets down. https://t.me/Is_it_UPBot
+> A Telegram bot that verifies whether or not a website is up, tracks URLs and notifies when hosts have unreachable connections. https://t.me/Is_it_UPBot
+
+<img src="logo.jpg" width="48px" />
 
 ## Installation
 
@@ -8,21 +9,21 @@ Telegram bot to verify if a website is up or track an URL to be notified when it
 
 ### or run your own bot
 1. Clone the project
-2. Go to directory
+2. Go to your IsItUp directory
 ```bash
-cd IsItUP/
+cd /path/to/IsItUP/
 ```
 
-3. Set an enviroment variable called IS_IT_UP_TOKEN with your telegram token.
-To learn how to do: read this [great article](https://www.schrodinger.com/kb/1842).
-At bash:
+3. Set an enviroment variable named `IS_IT_UP_TOKEN` with your telegram token.
+Read this [great article](https://www.schrodinger.com/kb/1842) and learn how to do it properly.
+On bash:
 ```bash
 export IS_IT_UP_TOKEN=your_telegram_token
 ```
-4. (Optional) Setup Firebase. (If you want the [track feature](#track-if-enabled))
-    * [Create a Firebase project and download the credentials](https://firebase.google.com/docs/server/setup)
-    * Set environment variables called IS_IT_UP_FIREBASE_PRIVATE_KEY,
-    IS_IT_UP_FIREBASE_CLIENT_EMAIL and  IS_IT_UP_FIREBASE_DATABASE_URL with your firebase credentials (private key and client email are in the downloaded file)
+4. (Optional) Setup Firebase if you want to enable the [track feature](#track-if-enabled))
+    * [Create a Firebase project and download its credentials](https://firebase.google.com/docs/server/setup)
+    * Set environment variables named `IS_IT_UP_FIREBASE_PRIVATE_KEY`,
+    `IS_IT_UP_FIREBASE_CLIENT_EMAIL` and `IS_IT_UP_FIREBASE_DATABASE_URL` with your firebase credentials (private key and client email are in the downloaded file)
     ```bash
     export IS_IT_UP_FIREBASE_CLIENT_EMAIL=email@domain.com
     ```
@@ -41,11 +42,11 @@ npm start
 
 ## Usage
 
-It can be done with [IsItUP?](https://t.me/Is_it_UPBot) bot or your own bot.
+It can be done with [IsItUP?](https://t.me/Is_it_UPBot) bot or your own bot:
 
 ### Conversation
 
-* Start a conversation
+* Start a conversation with the bot
 * Type:
 ```
 /verify https://telegram.org
@@ -54,31 +55,31 @@ or just
 ```
 https://telegram.org
 ```
-to verify the availability of one website
+to verify whether a website is available or not
 
 ### Track (if enabled)
-* To track an URL, you have to type:
+* You may track an URL by typing: _// check step #4 for enabling tracking_
 ```
 /track https://telegram.org
 ```
 
-* To delete an URL from the track list you have to type:
+* You may delete an URL from the track list by typing:
 ```
 /track_delete
 ```
 and then click at the URL you want to delete
 
-* To get a list of URLs you are tracking:
+* To list the URLs you are tracking:
 ```
 /track_list
 ```
 
-Every 5 minutes the bot will run a check at  track list, if the status of an URL get changed(up->down, down->up), the user will be notified.
+Every 5 minutes the bot will check the track list. The user will be notified when the status of an URL get changed(up->down, down->up).
 
 ### Group
-* [Invite](http://stackoverflow.com/a/40175742) the bot to a group
+* You may as well [invite](http://stackoverflow.com/a/40175742) the bot to a group
 
-* Call it by name and tell the domain
+* Call it by name and tell the domain you want to watch
 ```
 @Is_it_UPBot https://telegram.org
 ```
@@ -95,8 +96,8 @@ PS: telegram.org is a sample (of course :D), type whatever you need.
 
 ## Thanks
 
-* [isitup.org](https://isitup.org/) - for the concept
-* [Node.js Telegram Bot API](https://github.com/yagop/node-telegram-bot-api) - for provide an easy way to create a telegram bot
+* [isitup.org](https://isitup.org/) - for the concepts and ideas
+* [Node.js Telegram Bot API](https://github.com/yagop/node-telegram-bot-api) - for providing an easy way to create a telegram bot
 
 
 ## License
